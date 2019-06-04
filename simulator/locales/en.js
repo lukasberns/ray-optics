@@ -27,6 +27,9 @@ locales["en"] = {
   "tooltitle_mirror": {
     "message": "Line segment"
   },
+  "tooltitle_retroreflector": {
+    "message": "Retroreflector"
+  },
   "tooltitle_arcmirror": {
     "message": "Circular arc"
   },
@@ -101,6 +104,9 @@ locales["en"] = {
   },
   "tool_mirror": {
     "message": "Segment"
+  },
+  "tool_retroreflector": {
+    "message": "Retroreflector"
   },
   "tool_arcmirror": {
     "message": "Circular Arc"
@@ -257,6 +263,9 @@ locales["en"] = {
   },
   "tool_mirror_popover": {
     "message": "Simulate the reflection of light on a mirror. (Drag or click to create.)"
+  },
+  "tool_retroreflector_popover": {
+    "message": "Simulate the reflection of light on a retroreflector. (Drag or click to create.)"
   },
   "tool_arcmirror_popover": {
     "message": "A mirror whose shape is part of a circle, which is defined by three points. (Drag or click to create. First 2 points define the gap between arc's edges, the last point defines the arc's size.)"

@@ -29,6 +29,8 @@ function ToolBarViewModel() {
       self.mirrors = new ToolBarItem("Mirrors", "tool_mirror_", 4, ToolTypeEnum.RADIOLIST, [
         new ToolBarItem("Segment", "tool_mirror", "mirror",
           ToolTypeEnum.RADIO),
+        new ToolBarItem("Retro Reflector", "tool_retroreflector", "retroreflector",
+          ToolTypeEnum.RADIO),
         new ToolBarItem("Circular Arc", "tool_arcmirror", "mirror_arc",
           ToolTypeEnum.RADIO),
         new ToolBarItem("Ideal Curved", "tool_idealmirror", "ideal_curved_mirror",

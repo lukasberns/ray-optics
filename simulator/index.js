@@ -1711,6 +1711,50 @@ var canvasPainter = {
 
   };
 
+  //"mirror"(鏡子)物件
+  objTypes['retroreflector'] = {
+
+  //======================================建立物件=========================================
+  create: function(mouse) {
+    return {type: 'retroreflector', p1: mouse, p2: mouse};
+  },
+
+  //使用lineobj原型
+  c_mousedown: objTypes['lineobj'].c_mousedown,
+  c_mousemove: objTypes['lineobj'].c_mousemove,
+  c_mouseup: objTypes['lineobj'].c_mouseup,
+  move: objTypes['lineobj'].move,
+  clicked: objTypes['lineobj'].clicked,
+  dragging: objTypes['lineobj'].dragging,
+  rayIntersection: objTypes['lineobj'].rayIntersection,
+
+  //=================================將物件畫到Canvas上====================================
+  draw: function(obj, canvas) {
+    //ctx.lineWidth=1.5;
+    ctx.strokeStyle = 'rgb(168,168,168)';
+    ctx.beginPath();
+    ctx.moveTo(obj.p1.x, obj.p1.y);
+    ctx.lineTo(obj.p2.x, obj.p2.y);
+    ctx.stroke();
+    //ctx.lineWidth=1;
+  },
+
+
+
+  //=============================當物件被光射到時================================
+  shot: function(mirror, ray, rayIndex, rp) {
+    var rx = ray.p1.x - rp.x;
+    var ry = ray.p1.y - rp.y;
+    ray.p1 = rp;
+    ray.p2 = graphs.point(rp.x + rx, rp.y + ry);
+  }
+
+
+
+
+
+  };
+
   //"lens"(透鏡)物件
   objTypes['lens'] = {
 
@@ -2855,7 +2899,7 @@ var canvasPainter = {
   var clickExtent_point_construct = 10;
   var tools_normal = ['laser', 'radiant', 'parallel', 'blackline', 'ruler', 'protractor', ''];
   var tools_withList = ['mirror_', 'refractor_'];
-  var tools_inList = ['mirror', 'arcmirror', 'idealmirror', 'lens', 'refractor', 'halfplane', 'circlelens'];
+  var tools_inList = ['mirror', 'retroreflector', 'arcmirror', 'idealmirror', 'lens', 'refractor', 'halfplane', 'circlelens'];
   var modes = ['light', 'extended_light', 'images', 'observer'];
   var xyBox_cancelContextMenu = false;
   var scale = 1;
@@ -4733,6 +4777,8 @@ var canvasPainter = {
       var t = window.toolBarViewModel.mirrors.selected();
       if (t == "Segment")
         AddingObjType = "mirror";
+      else if (t == "Retro Reflector")
+        AddingObjType = "retroreflector";
       else if (t == "Circular Arc")
         AddingObjType = "arcmirror";
       else if (t == "Ideal Curved")
@@ -5004,6 +5050,10 @@ var canvasPainter = {
     //Mirror->Line
     document.getElementById('tool_mirror').value = getMsg('tooltitle_mirror');
     document.getElementById('tool_mirror').dataset['n'] = getMsg('toolname_mirror_');
+
+    //Mirror->Retroreflector
+    document.getElementById('tool_retroreflector').value = getMsg('tooltitle_retroreflector');
+    document.getElementById('tool_retroreflector').dataset['n'] = getMsg('toolname_mirror_');
 
     //Mirror->Circular Arc
     document.getElementById('tool_arcmirror').value = getMsg('tooltitle_arcmirror');
